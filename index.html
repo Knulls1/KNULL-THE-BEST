@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1024, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>𝕶𝖓𝖚𝖑𝖑</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html, body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+body{
+  background:#000000; /* tam siyah */
+  color:#00d9ff;
+  font-family:'Share Tech Mono', monospace;
+  display:flex;
+  flex-direction:column;
+}
+
+/* GRID LAYOUT */
+.container{
+  display:grid;
+  grid-template-columns:260px 1fr 300px;
+  grid-template-rows:1fr auto;
+  gap:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+
+/* PANELS */
+.panel{
+  border:1px solid #00d9ff55;
+  background:#000000; /* panel tam siyah */
+  position:relative;
+  box-shadow:0 0 10px #00d9ff22 inset;
+  padding:10px;
+  overflow:hidden;
+}
+
+.title{
+  position:absolute;
+  top:-9px;
+  left:10px;
+  background:#000000;
+  padding:0 8px;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+/* LEFT PANEL */
+#left{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  height:100%;
+}
+.stat{margin:10px 0;font-size:14px;}
+#video3{
+  width:100%;
+  height:calc(100% - 140px);
+  object-fit:cover;
+  display:block;
+  margin:0;
+}
+
+/* CLOCK */
+.clock{
+  font-size:40px;
+  text-align:center;
+  margin-top:20px;
+  text-shadow:0 0 10px #00d9ff;
+}
+
+/* MAIN PANEL */
+#main{
+  position:relative;
+  font-size:14px;
+  overflow:hidden;
+  height:100%;
+}
+
+/* VIDEO1: ORTA PANEL ARKA PLAN */
+#video-bg{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+  margin:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.5; /* biraz daha net */
+}
+
+/* AKAN YAZILAR */
+#terminal{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  overflow-y:auto;
+  padding-top:20px;
+  padding-bottom:20px;
+  color:#00d9ff;
+}
+
+/* SOSYAL BUTONLAR */
+#social-buttons{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  display:grid;
+  grid-template-columns:repeat(2, 120px);
+  grid-template-rows:repeat(2, 50px);
+  grid-gap:15px;
+  z-index:2;
+}
+#social-buttons button{
+  padding:10px;
+  background:#00d9ff22;
+  border:1px solid #00d9ff55;
+  color:#00d9ff;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.2s;
+}
+#social-buttons button:hover{
+  background:#00d9ff44;
+}
+
+/* RIGHT PANEL */
+#right{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  height:100%;
+}
+canvas{width:100%; height:200px;}
+#video2{
+  width:100%;
+  height:calc(100% - 220px);
+  object-fit:cover;
+  display:block;
+  margin:0;
+}
+
+/* SCANLINE */
+body::after{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:repeating-linear-gradient(
+    transparent 0px,
+    transparent 2px,
+    rgba(0,217,255,0.03) 3px
+  );
+  pointer-events:none;
+}
+</style>
+</head>
+<body>
+<div class="container">  
+
+  <!-- LEFT PANEL -->
+  <div id="left" class="panel">
+    <div class="title">SYSTEM</div>
+    <div class="clock" id="clock"></div>
+    <div class="stat">USER : 𝕶𝖓𝖚𝖑𝖑</div>
+    <div class="stat">OS : Arch Linux x86_64</div>
+    <div class="stat">KERNEL : 6.9.6</div>
+    <div class="stat">CPU : i7 Cyber Core</div>
+    <div class="stat">GPU : UHD Phantom</div>
+    <div class="stat">MEMORY : 3.6GB / 16GB</div>
+
+    <video id="video3" src="https://files.catbox.moe/2w29sw.mp4" autoplay loop muted></video>
+  </div>
+
+  <!-- ORTA PANEL -->
+  <div id="main" class="panel">
+    <div class="title">MAIN TERMINAL</div>
+    <video id="video-bg" src="https://files.catbox.moe/2hebl8.mp4" autoplay loop muted></video>
+    <div id="terminal"></div>
+    <div id="social-buttons">
+      <button onclick="window.open('https://wa.me/123456789')">WhatsApp</button>
+      <button onclick="window.open('https://instagram.com/youraccount')">Instagram</button>
+      <button onclick="window.open('https://discord.com/users/yourid')">Discord</button>
+      <button onclick="window.open('https://t.me/yourusername')">Telegram</button>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div id="right">
+    <div class="panel">
+      <div class="title">NETWORK STATUS</div>
+      IP : 26.66.104.101<br>
+      STATE : ONLINE<br>
+      PING : 19ms
+    </div>
+    <div class="panel">
+      <div class="title">WORLD VIEW</div>
+      <canvas id="globe"></canvas>
+    </div>
+    <video id="video2" src="https://files.catbox.moe/2w29sw.mp4" autoplay loop muted></video>
+  </div>
+</div>
+
+<audio id="bg-music" src="https://files.catbox.moe/z7r7w5.mp3" autoplay loop></audio>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+function updateClock(){
+  const d=new Date();
+  document.getElementById("clock").innerText=d.toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+updateClock();
+
+const term=document.getElementById("terminal");
+const logs=[
+  "Initializing Diavo.Exe interface...",
+  "Loading cyber modules...",
+  "Scanning network nodes...",
+  "Access granted.",
+  "Monitoring packets...",
+  "Firewall bypass simulation...",
+  "Listening ports...",
+  "Ghost protocol active..."
+];
+setInterval(()=>{
+  const line=logs[Math.floor(Math.random()*logs.length)];
+  term.innerHTML+=line+"\n";
+  term.scrollTop=term.scrollHeight;
+},900);
+
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,1,0.1,1000);
+const renderer=new THREE.WebGLRenderer({
+  canvas:document.getElementById("globe"),
+  alpha:true
+});
+renderer.setSize(260,200);
+const geo=new THREE.SphereGeometry(2,32,32);
+const mat=new THREE.MeshBasicMaterial({wireframe:true,color:0x00d9ff});
+const globe=new THREE.Mesh(geo,mat);
+scene.add(globe);
+camera.position.z=5;
+function animate(){requestAnimationFrame(animate); globe.rotation.y+=0.006; renderer.render(scene,camera);}
+animate();
+</script>
+</body>
+</html>
