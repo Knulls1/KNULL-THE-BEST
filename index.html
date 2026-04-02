@@ -215,7 +215,17 @@ body::after{
   </div>
 </div>
 
-<audio id="bg-music" src="https://github.com/Knulls1/KNULL-THE-BEST/raw/refs/heads/main/ssstik.io_@zykrit.edits_1770667466112.mp3" autoplay loop></audio>
+<audio id="bg-music" src="https://github.com/Knulls1/KNULL-THE-BEST/raw/refs/heads/main/ssstik.io_@zykrit.edits_1770667466112.mp3" autoplay loop muted></audio>
+
+<script>
+const music = document.getElementById("bg-music");
+// autoplay engelini aşmak için küçük bir delay ile tekrar çalmayı deniyoruz
+music.muted = false; // sesin açılması
+music.play().catch(()=>{ 
+  // autoplay engellenirse bir tıklama bekle
+  document.body.addEventListener("click",()=>music.play());
+});
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
